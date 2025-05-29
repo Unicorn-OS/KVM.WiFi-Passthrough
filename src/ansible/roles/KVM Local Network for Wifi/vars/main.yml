@@ -1,0 +1,6 @@
+---
+tmp_dir: /var/lib/libvirt/tmp
+
+bridge_name: "virbr1"
+
+virt_network_uuid: "8d5b5f09-3d4c-46e6-b3c0-0cadb2283395"

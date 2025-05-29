@@ -1,0 +1,29 @@
+---
+- name: Create a directory
+  ansible.builtin.file:
+    path: "{{ tmp_dir }}"
+    state: directory
+    mode: '0755'
+  become: true
+
+- name: network exists
+  shell: "virsh net-info {{ network_name }}"
+  register: net_exist
+
+- debug:
+    msg: "{{ virt_network_uuid not in net_exist.stdout_lines[1] }}"
+
+- name: Template a file to /etc/file.conf
+  ansible.builtin.template:
+    src: local-net.for-wifi.xml.j2
+    dest: "{{ tmp_dir }}/local-net.for-wifi.xml"
+    owner: "{{ ansible_env.USER }}"
+    group: "{{ ansible_env.USER }}"
+    mode: '0755'
+  become: true
+
+- name: Create Local network for VM.Wifi router
+  ansible.builtin.command:
+    cmd: "virsh net-create {{ tmp_dir }}/local-net.for-wifi.xml"
+    creates: /path/to/database
+  when: "{{ virt_network_uuid not in net_exist.stdout_lines[1] }}"

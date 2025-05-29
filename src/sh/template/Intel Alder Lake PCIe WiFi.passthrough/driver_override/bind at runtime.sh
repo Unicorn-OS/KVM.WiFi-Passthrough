@@ -1,3 +1,4 @@
+# This can Bind to vfio-pci while Running!
 dev=0000:00:14.3
 
 echo "vfio-pci" | sudo tee /sys/bus/pci/devices/$dev/driver_override
