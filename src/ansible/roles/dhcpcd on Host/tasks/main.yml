@@ -1,0 +1,4 @@
+---
+- name: dhcpcd once VM.Router is booted
+  ansible.builtin.command: "dhcpcd {{ bridge_name }}" 
+  become: true
