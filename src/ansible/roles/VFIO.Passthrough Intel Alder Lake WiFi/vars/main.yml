@@ -1,0 +1,3 @@
+---
+
+existing_kernel_options: "vfio-pci.ids="

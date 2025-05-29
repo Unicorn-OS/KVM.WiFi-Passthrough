@@ -1,0 +1,9 @@
+---
+roles:
+- UniInc.KVM
+- UniInc.VirtManager
+
+# Todo:
+# https://github.com/Unicorn-OS/VFIO.KVM
+- UniInc.VFIO
+- UniInc.VFIO-passthrough-WiFi

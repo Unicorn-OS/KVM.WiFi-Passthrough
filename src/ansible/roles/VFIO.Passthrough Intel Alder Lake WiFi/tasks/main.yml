@@ -1,0 +1,34 @@
+---
+
+- name: "Verify that string exists in file"
+  find:
+    name: "/etc/default" # Directory wit hfile
+    file_type: file
+    patterns: "grub"  # File to search
+    use_regex: false
+    read_whole_file: true
+    contains: "vfio-pci.ids=*.{{ wifi_pci_id }},"
+  register: find_result
+  become: true
+
+# - name: Debug
+#   debug:
+#     msg: "{{ find_result }}"
+
+- name: Enable iommu in grub kernel option
+  ansible.builtin.replace:
+    path: /etc/default/grub
+    before: 'GRUB_CMDLINE_LINUX'
+    regexp: '{{ existing_kernel_options }}'
+    replace: 'vfio-pci.ids={{ wifi_pci_id }},'
+  become: true
+  when: find_result.matched == 0
+  notify: Debian Update grub
+
+- name: Blacklist wifi kernel module
+  ansible.builtin.lineinfile:
+    path: /etc/modprobe.d/blacklist.conf
+    regexp: '^blacklist iwlwifi'
+    line: blacklist iwlwifi
+  become: true
+  notify: Update initramfs
