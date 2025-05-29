@@ -1,5 +1,5 @@
 ---
-tmp_dir: /var/lib/libvirt/tmp
+tmp_dir: /var/lib/libvirt/xml/network
 
 bridge_name: "virbr1"
 
