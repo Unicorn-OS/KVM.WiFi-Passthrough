@@ -1,7 +1,7 @@
 ---
 roles:
 - UniInc.KVM
-- UniInc.VirtManager
+- UniInc.Virt-Manager
 
 # Todo:
 # https://github.com/Unicorn-OS/VFIO.KVM
