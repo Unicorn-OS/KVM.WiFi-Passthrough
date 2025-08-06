@@ -2,4 +2,5 @@
 roles:
 - UniInc.KVM
 - UniInc.VFIO
-- UniInc.VFIO-passthrough-WiFi
+# Todo:
+#- UniInc.VFIO-passthrough-WiFi
