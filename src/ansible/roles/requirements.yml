@@ -2,5 +2,9 @@
 roles:
 - UniInc.KVM
 - UniInc.VFIO
+- UniInc.OVMF
+- UniInc.Enable-IOMMU
+- UniInc.KVM-ignore_msrs
+- UniInc.VFIO-PCI-Kernel-module
 # Todo:
 #- UniInc.VFIO-passthrough-WiFi
