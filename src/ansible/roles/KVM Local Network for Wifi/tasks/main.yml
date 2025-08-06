@@ -9,9 +9,11 @@
 - name: network exists
   shell: "virsh net-info {{ network_name }}"
   register: net_exist
+  failed_when: false
 
 - debug:
     msg: "{{ virt_network_uuid not in net_exist.stdout_lines[1] }}"
+  when: net_exist.stdout_lines[1] is defined 
 
 - name: Template a file to /etc/file.conf
   ansible.builtin.template:
@@ -26,4 +28,5 @@
   ansible.builtin.command:
     cmd: "virsh net-create {{ tmp_dir }}/local-net.for-wifi.xml"
     creates: /path/to/database
-  when: "{{ virt_network_uuid not in net_exist.stdout_lines[1] }}"
+  when: net_exist.stdout_lines[1] is defined and virt_network_uuid not in net_exist.stdout_lines[1]
+#when: "{{ virt_network_uuid not in net_exist.stdout_lines[1] }}"
